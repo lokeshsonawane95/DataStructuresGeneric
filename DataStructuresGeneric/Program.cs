@@ -10,6 +10,7 @@
             {
                 Console.WriteLine("\n1. Unordered List Generic");
                 Console.WriteLine("2. Ordered List");
+                Console.WriteLine("3. Balanced Parentheses");
                 Console.WriteLine("0. Exit");
                 Console.Write("Enter your choice : ");
                 int choice = Convert.ToInt32(Console.ReadLine());
@@ -60,6 +61,43 @@
                             list2.DeleteValue(searchValue);
                         }
                         list2.Display();
+                        break;
+                    case 3:
+                        BalancedParentheses<char> balancedParantheses = new BalancedParentheses<char>();
+                        Console.WriteLine("Enter the expression containing parentheses i.e. ( and ) : ");
+                        string expression = Console.ReadLine();
+                        char[] expressionArray = expression.ToCharArray();
+                        for (int i = 0; i < expressionArray.Length; i++)
+                        {
+                            if (expressionArray[i] == '(')
+                            {
+                                balancedParantheses.Push(expressionArray[i]);
+                                balancedParantheses.Display();
+                            }
+                            if (expressionArray[i] == ')')
+                            {
+                                if (balancedParantheses.Peek() == ' ')
+                                {
+                                    Console.WriteLine("Entered expression \"" + expression + "\" does not contains balanced parentheses");
+                                    return;
+                                }
+                                if (balancedParantheses.Peek() == '(')
+                                {
+                                    balancedParantheses.Pop();
+                                    balancedParantheses.Display();
+                                }
+                            }
+                        }
+                        //After all the closing parentheses are finished i.e. )
+                        if (balancedParantheses.Peek() == '(')
+                        {
+
+                            Console.WriteLine("Entered expression \"" + expression + "\" does not contains balanced parentheses");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Entered expression \"" + expression + "\" contains balanced parentheses");
+                        }
                         break;
                     case 0:
                         return;

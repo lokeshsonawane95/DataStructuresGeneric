@@ -97,6 +97,35 @@ namespace DataStructuresGeneric
             }
         }
 
+        //Odered Linked List in ascending order
+        internal void OrderedList(T data)
+        {
+            Node<T> newNode = new Node<T>(data);
+
+            Node<T> tempHead = head;
+
+            //If list is empty or the head is pointing to a node of data which is greater than the current node
+            if (head == null || head.data.CompareTo(newNode.data) >= 0)
+            {
+                //connect newNode's next to the head
+                newNode.next = head;
+
+                //connect head to the new node
+                head = newNode;
+            }
+            else
+            {
+                //tempHead will got till the end and will locate the node's data less than newNode's data
+                while (tempHead.next != null && tempHead.next.data.CompareTo(newNode.data) < 0)
+                {
+                    tempHead = tempHead.next;
+                }
+                //then newNode will be inserted after tempHead node
+                newNode.next = tempHead.next;
+                tempHead.next = newNode;
+            }
+        }
+
         //For displaying all elements in Linked List
         internal void Display()
         {
